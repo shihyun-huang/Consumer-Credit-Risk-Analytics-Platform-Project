@@ -1,0 +1,2 @@
+-- Consumer Credit Risk Analytics Platform
+-- Database schema
