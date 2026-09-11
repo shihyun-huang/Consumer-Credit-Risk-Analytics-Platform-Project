@@ -30,3 +30,39 @@ CREATE TABLE IF NOT EXISTS loans (
     total_acc DECIMAL(10,2),
     default_flag TINYINT
 );
+
+-- Load cleaned LendingClub loan data
+LOAD DATA LOCAL INFILE '/Users/gei/Desktop/Consumer-Credit-Risk-Analytics-Platform-Project/data/loans_clean.csv'
+INTO TABLE loans
+FIELDS TERMINATED BY ','
+OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(
+    loan_id,
+    loan_amnt,
+    term,
+    int_rate,
+    installment,
+    grade,
+    sub_grade,
+    emp_length,
+    home_ownership,
+    annual_inc,
+    verification_status,
+    issue_d,
+    loan_status,
+    purpose,
+    addr_state,
+    @dti,
+    fico_range_low,
+    fico_range_high,
+    open_acc,
+    revol_bal,
+    @revol_util,
+    total_acc,
+    default_flag
+)
+SET
+    dti = NULLIF(@dti, ''),
+    revol_util = NULLIF(@revol_util, '');
